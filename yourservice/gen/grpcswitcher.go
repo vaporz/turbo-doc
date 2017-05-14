@@ -3,9 +3,9 @@ package gen
 import (
 	"reflect"
 	"net/http"
-	"turbo"
+	"github.com/vaporz/turbo"
 	"errors"
-	"turbo/example/yourservice/gen/proto"
+	"turbo-example/yourservice/gen/proto"
 )
 
 /*

@@ -1,9 +1,9 @@
 package interceptor
 
 import (
-	"turbo"
-	"net/http"
 	"fmt"
+	"github.com/vaporz/turbo"
+	"net/http"
 )
 
 type LogInterceptor struct {

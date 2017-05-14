@@ -1,19 +1,19 @@
 package main
 
 import (
-	"turbo"
-	"turbo/example/yourservice/gen"
-	t "turbo/example/yourservice/gen/thrift/gen-go/gen"
 	"git.apache.org/thrift.git/lib/go/thrift"
-	i "turbo/example/yourservice/interceptor"
-	"reflect"
+	"github.com/vaporz/turbo"
 	"net/http"
+	"reflect"
+	"turbo-example/yourservice/gen"
+	t "turbo-example/yourservice/gen/thrift/gen-go/gen"
+	i "turbo-example/yourservice/interceptor"
 )
 
 func main() {
 	turbo.Intercept([]string{"GET"}, "/hello", i.LogInterceptor{})
 	turbo.RegisterMessageFieldConvertor(new(t.HelloValues), convertHelloValues)
-	turbo.StartThriftHTTPServer("turbo/example/yourservice", thriftClient, gen.ThriftSwitcher)
+	turbo.StartThriftHTTPServer("turbo-example/yourservice", thriftClient, gen.ThriftSwitcher)
 }
 
 func thriftClient(trans thrift.TTransport, f thrift.TProtocolFactory) interface{} {

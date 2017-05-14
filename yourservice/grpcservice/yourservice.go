@@ -1,12 +1,12 @@
 package main
 
 import (
-	"net"
-	"log"
 	"google.golang.org/grpc"
-	"turbo/example/yourservice/grpcservice/impl"
-	"turbo/example/yourservice/gen/proto"
 	"google.golang.org/grpc/reflection"
+	"log"
+	"net"
+	"turbo-example/yourservice/gen/proto"
+	"turbo-example/yourservice/grpcservice/impl"
 )
 
 func main() {

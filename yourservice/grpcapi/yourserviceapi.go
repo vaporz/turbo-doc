@@ -1,15 +1,15 @@
 package main
 
 import (
-	"turbo"
-	"google.golang.org/grpc"
-	"turbo/example/yourservice/gen/proto"
-	"turbo/example/yourservice/gen"
-	i "turbo/example/yourservice/interceptor"
-	"net/http"
-	"strconv"
 	"errors"
+	"github.com/vaporz/turbo"
+	"google.golang.org/grpc"
+	"net/http"
 	"reflect"
+	"strconv"
+	"turbo-example/yourservice/gen"
+	"turbo-example/yourservice/gen/proto"
+	i "turbo-example/yourservice/interceptor"
 )
 
 func main() {
@@ -23,7 +23,7 @@ func main() {
 
 	//turbo.RegisterMessageFieldConvertor(new(proto.CommonValues), convertCommonValues)
 
-	turbo.StartGrpcHTTPServer("turbo/example/yourservice", grpcClient, gen.GrpcSwitcher)
+	turbo.StartGrpcHTTPServer("turbo-example/yourservice", grpcClient, gen.GrpcSwitcher)
 }
 
 func grpcClient(conn *grpc.ClientConn) interface{} {
