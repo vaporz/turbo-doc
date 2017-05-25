@@ -6,6 +6,7 @@ import (
 	"github.com/vaporz/turbo"
 	"errors"
 	"turbo-example/yourservice/gen/proto"
+	"turbo-example/common"
 )
 
 /*
@@ -14,7 +15,7 @@ this is a generated file, DO NOT EDIT!
 var GrpcSwitcher = func(methodName string, resp http.ResponseWriter, req *http.Request) (serviceResponse interface{}, err error) {
 	switch methodName { 
 	case "SayHello":
-		request := &proto.SayHelloRequest{ Values: &proto.CommonValues{}, }
+		request := &proto.SayHelloRequest{ Values: &common.CommonValues{}, }
 		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
 		if err != nil {
 			return nil, err

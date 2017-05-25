@@ -1,10 +1,11 @@
 syntax = "proto3";
-import "shared.proto";
+import "turbo-example/common/shared.proto";
+import "turbo/plugin/proto/validator/validator.proto";
 package proto;
 
 message SayHelloRequest {
-    CommonValues values = 1;
-    string yourName = 2;
+    common.CommonValues values = 1;
+    string yourName = 2 [(validator.NotBlank)=true, (validator.MaxLength)=5];
 }
 
 message SayHelloResponse {

@@ -10,6 +10,7 @@ import (
 	"turbo-example/yourservice/gen"
 	"turbo-example/yourservice/gen/proto"
 	i "turbo-example/yourservice/interceptor"
+	"turbo-example/common"
 )
 
 func main() {
@@ -31,7 +32,7 @@ func grpcClient(conn *grpc.ClientConn) interface{} {
 }
 
 func convertCommonValues(req *http.Request) reflect.Value {
-	result := &proto.CommonValues{}
+	result := &common.CommonValues{}
 	result.SomeId = 1111111
 	return reflect.ValueOf(result)
 }
