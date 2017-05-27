@@ -21,7 +21,26 @@ message EatAppleResponse {
     string message = 1;
 }
 
+message TestProtoRequest {
+}
+
+
+message TestProtoResponse {
+    message child {
+        int64 childValue = 1;
+    }
+    CommonValues values = 1;
+    string stringValue = 2;
+    int32 int32Value = 3;
+    int64 int64Value = 4;
+    child c1 = 5;
+    child c2 = 6;
+    repeated int64 int64Slice = 7;
+    repeated child childs = 8;
+}
+
 service YourService {
     rpc sayHello (SayHelloRequest) returns (SayHelloResponse) {}
     rpc eatApple (EatAppleRequest) returns (EatAppleResponse) {}
+    rpc testProto (TestProtoRequest) returns (TestProtoResponse) {}
 }

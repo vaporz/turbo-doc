@@ -10,6 +10,9 @@ import (
 	"turbo-example/yourservice/gen"
 	"turbo-example/yourservice/gen/proto"
 	i "turbo-example/yourservice/interceptor"
+	"fmt"
+	"github.com/golang/protobuf/jsonpb"
+	"bytes"
 )
 
 func main() {
@@ -20,6 +23,7 @@ func main() {
 	turbo.SetPreprocessor("/eat_apple/{num:[0-9]+}", preEatApple)
 	//turbo.SetHijacker("/eat_apple/{num:[0-9]+}", hijackEatApple)
 	turbo.SetPostprocessor("/eat_apple/{num:[0-9]+}", postEatApple)
+	turbo.SetPostprocessor("/testproto", postTestProto)
 
 	//turbo.RegisterMessageFieldConvertor(new(proto.CommonValues), convertCommonValues)
 
@@ -42,9 +46,9 @@ func hijackEatApple(resp http.ResponseWriter, req *http.Request) {
 	r.Num = 999
 	res, err := client.EatApple(req.Context(), r)
 	if err == nil {
-		resp.Write([]byte(res.String() + "\n"))
+		resp.Write([]byte(res.String()))
 	} else {
-		resp.Write([]byte(err.Error() + "\n"))
+		resp.Write([]byte(err.Error()))
 	}
 }
 
@@ -55,7 +59,7 @@ func preEatApple(resp http.ResponseWriter, req *http.Request) error {
 		return errors.New("invalid num")
 	}
 	if num > 5 {
-		resp.Write([]byte("Too many apples!\n"))
+		resp.Write([]byte("Too many apples!"))
 		return errors.New("Too many apples")
 	}
 	return nil
@@ -64,4 +68,17 @@ func preEatApple(resp http.ResponseWriter, req *http.Request) error {
 func postEatApple(resp http.ResponseWriter, req *http.Request, serviceResp interface{}) {
 	sr := serviceResp.(*proto.EatAppleResponse)
 	resp.Write([]byte("this is from postprocesser, message=" + sr.Message))
+}
+
+func postTestProto(resp http.ResponseWriter, req *http.Request, serviceResp interface{}) {
+	sr := serviceResp.(*proto.TestProtoResponse)
+	var m jsonpb.Marshaler
+	var buf bytes.Buffer
+	m.Marshal(&buf, sr)
+	fmt.Println(buf.String())
+	bufBytes, err := turbo.FilterJsonWithStruct(buf.Bytes(), sr)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	resp.Write([]byte("this is from postprocesser, message=" + string(bufBytes)))
 }

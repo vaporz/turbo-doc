@@ -22,3 +22,4 @@ urlmapping:
   - POST /a/a SayHello
   - GET /a/b EatApple
   - GET /a/c EatApple
+  - GET /testproto TestProto

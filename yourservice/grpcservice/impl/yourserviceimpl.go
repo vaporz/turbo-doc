@@ -17,3 +17,16 @@ func (s *YourService) SayHello(ctx context.Context, req *proto.SayHelloRequest) 
 func (s *YourService) EatApple(ctx context.Context, req *proto.EatAppleRequest) (*proto.EatAppleResponse, error) {
 	return &proto.EatAppleResponse{Message: "Good taste! Apple num=" + strconv.FormatInt(int64(req.Num), 10)}, nil
 }
+
+func (s *YourService) TestProto(ctx context.Context, req *proto.TestProtoRequest) (*proto.TestProtoResponse, error) {
+	//resp := &proto.TestProtoResponse{}
+	resp := &proto.TestProtoResponse{}
+	resp.Int64Slice = []int64{11, 22, 33}
+	resp.Values = &proto.CommonValues{SomeId: 111}
+	resp.StringValue = "string value!"
+	resp.C1 = &proto.TestProtoResponseChild{ChildValue: 222}
+	//resp.C2 = &proto.TestProtoResponseChild{}
+	resp.Int32Value = 333
+	resp.Int64Value = 555
+	return resp, nil
+}
