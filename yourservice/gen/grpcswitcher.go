@@ -13,14 +13,6 @@ this is a generated file, DO NOT EDIT!
  */
 var GrpcSwitcher = func(methodName string, resp http.ResponseWriter, req *http.Request) (serviceResponse interface{}, err error) {
 	switch methodName { 
-	case "TestProto":
-		request := &proto.TestProtoRequest{  }
-		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
-		if err != nil {
-			return nil, err
-		}
-		params := turbo.MakeParams(req, reflect.ValueOf(request))
-		return turbo.ParseResult(callGrpcMethod(methodName, params))
 	case "SayHello":
 		request := &proto.SayHelloRequest{ Values: &proto.CommonValues{}, }
 		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
@@ -31,6 +23,14 @@ var GrpcSwitcher = func(methodName string, resp http.ResponseWriter, req *http.R
 		return turbo.ParseResult(callGrpcMethod(methodName, params))
 	case "EatApple":
 		request := &proto.EatAppleRequest{  }
+		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
+		if err != nil {
+			return nil, err
+		}
+		params := turbo.MakeParams(req, reflect.ValueOf(request))
+		return turbo.ParseResult(callGrpcMethod(methodName, params))
+	case "TestProto":
+		request := &proto.TestProtoRequest{  }
 		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
 		if err != nil {
 			return nil, err

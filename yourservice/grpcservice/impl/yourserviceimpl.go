@@ -2,8 +2,8 @@ package impl
 
 import (
 	"golang.org/x/net/context"
-	"turbo-example/yourservice/gen/proto"
 	"strconv"
+	"turbo-example/yourservice/gen/proto"
 )
 
 type YourService struct {
@@ -19,14 +19,14 @@ func (s *YourService) EatApple(ctx context.Context, req *proto.EatAppleRequest) 
 }
 
 func (s *YourService) TestProto(ctx context.Context, req *proto.TestProtoRequest) (*proto.TestProtoResponse, error) {
-	//resp := &proto.TestProtoResponse{}
 	resp := &proto.TestProtoResponse{}
 	resp.Int64Slice = []int64{11, 22, 33}
 	resp.Values = &proto.CommonValues{SomeId: 111}
 	resp.StringValue = "string value!"
 	resp.C1 = &proto.TestProtoResponseChild{ChildValue: 222}
-	//resp.C2 = &proto.TestProtoResponseChild{}
+	resp.C2 = &proto.TestProtoResponseChild{}
 	resp.Int32Value = 333
 	resp.Int64Value = 555
+	resp.Childs = []*proto.TestProtoResponseChild{}
 	return resp, nil
 }

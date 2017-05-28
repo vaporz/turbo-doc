@@ -1,8 +1,8 @@
 package impl
 
 import (
-	"turbo-example/yourservice/gen/thrift/gen-go/gen"
 	"fmt"
+	"turbo-example/yourservice/gen/thrift/gen-go/gen"
 )
 
 type YourService struct {
