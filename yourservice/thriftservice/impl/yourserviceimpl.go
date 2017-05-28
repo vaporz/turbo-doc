@@ -2,7 +2,7 @@ package impl
 
 import (
 	"fmt"
-	"turbo-example/yourservice/gen/thrift/gen-go/gen"
+	"github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
 )
 
 type YourService struct {

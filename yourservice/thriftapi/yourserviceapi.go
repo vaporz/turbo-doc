@@ -5,15 +5,15 @@ import (
 	"github.com/vaporz/turbo"
 	"net/http"
 	"reflect"
-	"turbo-example/yourservice/gen"
-	t "turbo-example/yourservice/gen/thrift/gen-go/gen"
-	i "turbo-example/yourservice/interceptor"
+	"github.com/vaporz/turbo-example/yourservice/gen"
+	t "github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
+	i "github.com/vaporz/turbo-example/yourservice/interceptor"
 )
 
 func main() {
 	turbo.Intercept([]string{"GET"}, "/hello", i.LogInterceptor{})
 	turbo.RegisterMessageFieldConvertor(new(t.HelloValues), convertHelloValues)
-	turbo.StartThriftHTTPServer("turbo-example/yourservice", thriftClient, gen.ThriftSwitcher)
+	turbo.StartThriftHTTPServer("github.com/vaporz/turbo-example/yourservice", thriftClient, gen.ThriftSwitcher)
 }
 
 func thriftClient(trans thrift.TTransport, f thrift.TProtocolFactory) interface{} {

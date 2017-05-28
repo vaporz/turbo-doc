@@ -3,7 +3,7 @@ package impl
 import (
 	"golang.org/x/net/context"
 	"strconv"
-	"turbo-example/yourservice/gen/proto"
+	"github.com/vaporz/turbo-example/yourservice/gen/proto"
 )
 
 type YourService struct {

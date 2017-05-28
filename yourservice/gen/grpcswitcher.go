@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"github.com/vaporz/turbo"
 	"errors"
-	"turbo-example/yourservice/gen/proto"
+	"github.com/vaporz/turbo-example/yourservice/gen/proto"
 )
 
 /*

@@ -5,8 +5,8 @@ import (
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
-	"turbo-example/yourservice/gen/proto"
-	"turbo-example/yourservice/grpcservice/impl"
+	"github.com/vaporz/turbo-example/yourservice/gen/proto"
+	"github.com/vaporz/turbo-example/yourservice/grpcservice/impl"
 )
 
 func main() {

@@ -4,8 +4,8 @@ import (
 	"git.apache.org/thrift.git/lib/go/thrift"
 	"log"
 	"os"
-	"turbo-example/yourservice/gen/thrift/gen-go/gen"
-	"turbo-example/yourservice/thriftservice/impl"
+	"github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
+	"github.com/vaporz/turbo-example/yourservice/thriftservice/impl"
 )
 
 func main() {

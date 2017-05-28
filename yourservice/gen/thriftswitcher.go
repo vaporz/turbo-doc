@@ -5,7 +5,7 @@ import (
 	"github.com/vaporz/turbo"
 	"net/http"
 	"reflect"
-	"turbo-example/yourservice/gen/thrift/gen-go/gen"
+	"github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
 )
 
 /*

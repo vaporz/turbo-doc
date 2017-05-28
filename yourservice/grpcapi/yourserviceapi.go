@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"reflect"
 	"strconv"
-	"turbo-example/yourservice/gen"
-	"turbo-example/yourservice/gen/proto"
-	i "turbo-example/yourservice/interceptor"
+	"github.com/vaporz/turbo-example/yourservice/gen"
+	"github.com/vaporz/turbo-example/yourservice/gen/proto"
+	i "github.com/vaporz/turbo-example/yourservice/interceptor"
 )
 
 func main() {
@@ -23,7 +23,7 @@ func main() {
 
 	//turbo.RegisterMessageFieldConvertor(new(proto.CommonValues), convertCommonValues)
 
-	turbo.StartGrpcHTTPServer("turbo-example/yourservice", grpcClient, gen.GrpcSwitcher)
+	turbo.StartGrpcHTTPServer("github.com/vaporz/turbo-example/yourservice", grpcClient, gen.GrpcSwitcher)
 }
 
 func grpcClient(conn *grpc.ClientConn) interface{} {
