@@ -13,6 +13,15 @@ import (
 )
 
 func main() {
+	initServer()
+	turbo.StartGrpcHTTPServer("github.com/vaporz/turbo-example/yourservice", "service", grpcClient, gen.GrpcSwitcher)
+}
+
+func grpcClient(conn *grpc.ClientConn) interface{} {
+	return proto.NewYourServiceClient(conn)
+}
+
+func initServer() {
 	turbo.Intercept([]string{"GET"}, "/hello", i.LogInterceptor{})
 	turbo.Intercept([]string{"GET"}, "/eat_apple/{num:[0-9]+}", i.LogInterceptor{})
 	turbo.Intercept([]string{"GET"}, "/a/a", i.LogInterceptor{Msg: "url interceptor"})
@@ -22,12 +31,6 @@ func main() {
 	turbo.SetPostprocessor("/eat_apple/{num:[0-9]+}", postEatApple)
 
 	//turbo.RegisterMessageFieldConvertor(new(proto.CommonValues), convertCommonValues)
-
-	turbo.StartGrpcHTTPServer("github.com/vaporz/turbo-example/yourservice", "service", grpcClient, gen.GrpcSwitcher)
-}
-
-func grpcClient(conn *grpc.ClientConn) interface{} {
-	return proto.NewYourServiceClient(conn)
 }
 
 func convertCommonValues(req *http.Request) reflect.Value {

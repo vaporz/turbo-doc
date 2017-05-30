@@ -2,20 +2,15 @@ package main
 
 import (
 	"git.apache.org/thrift.git/lib/go/thrift"
-	"log"
-	"os"
 	"github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
 	"github.com/vaporz/turbo-example/yourservice/thriftservice/impl"
+	"github.com/vaporz/turbo"
 )
 
 func main() {
-	transport, err := thrift.NewTServerSocket(":50052")
-	if err != nil {
-		log.Println("socket error")
-		os.Exit(1)
-	}
+	turbo.StartThriftService(50052, _TProcessor)
+}
 
-	server := thrift.NewTSimpleServer4(gen.NewYourServiceProcessor(impl.YourService{}), transport,
-		thrift.NewTTransportFactory(), thrift.NewTBinaryProtocolFactoryDefault())
-	server.Serve()
+func _TProcessor() thrift.TProcessor {
+	return gen.NewYourServiceProcessor(impl.YourService{})
 }
