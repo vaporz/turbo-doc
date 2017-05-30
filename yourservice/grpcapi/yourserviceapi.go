@@ -23,7 +23,7 @@ func main() {
 
 	//turbo.RegisterMessageFieldConvertor(new(proto.CommonValues), convertCommonValues)
 
-	turbo.StartGrpcHTTPServer("github.com/vaporz/turbo-example/yourservice", grpcClient, gen.GrpcSwitcher)
+	turbo.StartGrpcHTTPServer("github.com/vaporz/turbo-example/yourservice", "service", grpcClient, gen.GrpcSwitcher)
 }
 
 func grpcClient(conn *grpc.ClientConn) interface{} {
