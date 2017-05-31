@@ -11,9 +11,13 @@ import (
 )
 
 func main() {
+	initComponents()
+	turbo.StartThriftHTTPServer("github.com/vaporz/turbo-example/yourservice", "service", thriftClient, gen.ThriftSwitcher)
+}
+
+func initComponents() {
 	turbo.Intercept([]string{"GET"}, "/hello", i.LogInterceptor{})
 	turbo.RegisterMessageFieldConvertor(new(t.HelloValues), convertHelloValues)
-	turbo.StartThriftHTTPServer("github.com/vaporz/turbo-example/yourservice", "service", thriftClient, gen.ThriftSwitcher)
 }
 
 func thriftClient(trans thrift.TTransport, f thrift.TProtocolFactory) interface{} {
