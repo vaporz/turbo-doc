@@ -1,27 +1,34 @@
 package gen
 
 import (
-	"errors"
+	g "github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
 	"github.com/vaporz/turbo"
-	"net/http"
 	"reflect"
-	"github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
+	"net/http"
+	"errors"
 )
 
 /*
 this is a generated file, DO NOT EDIT!
-*/
+ */
 var ThriftSwitcher = func(methodName string, resp http.ResponseWriter, req *http.Request) (serviceResponse interface{}, err error) {
-	switch methodName {
+	switch methodName { 
 	case "SayHello":
-		args := gen.YourServiceSayHelloArgs{}
+		args := g.YourServiceSayHelloArgs{}
 		params, err := turbo.BuildArgs(reflect.TypeOf(args), reflect.ValueOf(args), req, buildStructArg)
 		if err != nil {
 			return nil, err
 		}
 		return turbo.ParseResult(callThriftMethod(methodName, params))
 	case "EatApple":
-		args := gen.YourServiceEatAppleArgs{}
+		args := g.YourServiceEatAppleArgs{}
+		params, err := turbo.BuildArgs(reflect.TypeOf(args), reflect.ValueOf(args), req, buildStructArg)
+		if err != nil {
+			return nil, err
+		}
+		return turbo.ParseResult(callThriftMethod(methodName, params))
+	case "TestProto":
+		args := g.YourServiceTestProtoArgs{}
 		params, err := turbo.BuildArgs(reflect.TypeOf(args), reflect.ValueOf(args), req, buildStructArg)
 		if err != nil {
 			return nil, err
@@ -33,20 +40,20 @@ var ThriftSwitcher = func(methodName string, resp http.ResponseWriter, req *http
 }
 
 func callThriftMethod(methodName string, params []reflect.Value) []reflect.Value {
-	return reflect.ValueOf(turbo.ThriftService().(*gen.YourServiceClient)).MethodByName(methodName).Call(params)
+	return reflect.ValueOf(turbo.ThriftService().(*g.YourServiceClient)).MethodByName(methodName).Call(params)
 }
 
 func buildStructArg(typeName string, req *http.Request) (v reflect.Value, err error) {
-	switch typeName {
-	case "CommonValues":
-		request := &gen.CommonValues{}
+	switch typeName { 
+	case "HelloValues":
+		request := &g.HelloValues{  }
 		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
 		if err != nil {
 			return v, err
 		}
 		return reflect.ValueOf(request), nil
-	case "HelloValues":
-		request := &gen.HelloValues{}
+	case "CommonValues":
+		request := &g.CommonValues{  }
 		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
 		if err != nil {
 			return v, err

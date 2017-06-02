@@ -24,7 +24,6 @@ message EatAppleResponse {
 message TestProtoRequest {
 }
 
-
 message TestProtoResponse {
     message child {
         int64 childValue = 1;

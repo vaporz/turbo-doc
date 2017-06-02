@@ -1,11 +1,11 @@
 package gen
 
 import (
+	g "github.com/vaporz/turbo-example/yourservice/gen/proto"
+	"github.com/vaporz/turbo"
 	"reflect"
 	"net/http"
-	"github.com/vaporz/turbo"
 	"errors"
-	"github.com/vaporz/turbo-example/yourservice/gen/proto"
 )
 
 /*
@@ -14,7 +14,7 @@ this is a generated file, DO NOT EDIT!
 var GrpcSwitcher = func(methodName string, resp http.ResponseWriter, req *http.Request) (serviceResponse interface{}, err error) {
 	switch methodName { 
 	case "SayHello":
-		request := &proto.SayHelloRequest{ Values: &proto.CommonValues{}, }
+		request := &g.SayHelloRequest{ Values: &g.CommonValues{}, }
 		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
 		if err != nil {
 			return nil, err
@@ -22,7 +22,7 @@ var GrpcSwitcher = func(methodName string, resp http.ResponseWriter, req *http.R
 		params := turbo.MakeParams(req, reflect.ValueOf(request))
 		return turbo.ParseResult(callGrpcMethod(methodName, params))
 	case "EatApple":
-		request := &proto.EatAppleRequest{  }
+		request := &g.EatAppleRequest{  }
 		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
 		if err != nil {
 			return nil, err
@@ -30,7 +30,7 @@ var GrpcSwitcher = func(methodName string, resp http.ResponseWriter, req *http.R
 		params := turbo.MakeParams(req, reflect.ValueOf(request))
 		return turbo.ParseResult(callGrpcMethod(methodName, params))
 	case "TestProto":
-		request := &proto.TestProtoRequest{  }
+		request := &g.TestProtoRequest{  }
 		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
 		if err != nil {
 			return nil, err
@@ -43,5 +43,5 @@ var GrpcSwitcher = func(methodName string, resp http.ResponseWriter, req *http.R
 }
 
 func callGrpcMethod(methodName string, params []reflect.Value) []reflect.Value {
-	return reflect.ValueOf(turbo.GrpcService().(proto.YourServiceClient)).MethodByName(methodName).Call(params)
+	return reflect.ValueOf(turbo.GrpcService().(g.YourServiceClient)).MethodByName(methodName).Call(params)
 }
