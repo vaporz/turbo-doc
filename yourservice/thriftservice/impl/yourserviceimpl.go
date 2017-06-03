@@ -3,7 +3,12 @@ package impl
 import (
 	"fmt"
 	"github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
+	"git.apache.org/thrift.git/lib/go/thrift"
 )
+
+func TProcessor() thrift.TProcessor {
+	return gen.NewYourServiceProcessor(YourService{})
+}
 
 type YourService struct {
 }

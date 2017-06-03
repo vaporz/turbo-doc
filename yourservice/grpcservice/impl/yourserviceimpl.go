@@ -4,7 +4,12 @@ import (
 	"golang.org/x/net/context"
 	"strconv"
 	"github.com/vaporz/turbo-example/yourservice/gen/proto"
+	"google.golang.org/grpc"
 )
+
+func RegisterServer(s *grpc.Server) {
+	proto.RegisterYourServiceServer(s, &YourService{})
+}
 
 type YourService struct {
 }

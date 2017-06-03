@@ -6,7 +6,7 @@ config:
   thrift_service_address: 127.0.0.1:50052
   filter_proto_json: true
   filter_proto_json_emit_zerovalues: true
-  filter_proto_json_int64_as_number: true
+  filter_proto_json_int64_as_number: false
 
 # TODO make a grpc plugin to generate this mapping
 grpc-fieldmapping:
