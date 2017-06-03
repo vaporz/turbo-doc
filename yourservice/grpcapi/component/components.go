@@ -58,7 +58,7 @@ func preEatApple(resp http.ResponseWriter, req *http.Request) error {
 	return nil
 }
 
-func postEatApple(resp http.ResponseWriter, req *http.Request, serviceResp interface{}) {
+func postEatApple(resp http.ResponseWriter, req *http.Request, serviceResp interface{}, err error) {
 	sr := serviceResp.(*proto.EatAppleResponse)
 	resp.Write([]byte("this is from postprocesser, message=" + sr.Message))
 }
