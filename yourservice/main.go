@@ -10,9 +10,11 @@ import (
 )
 
 func main() {
+	gcomponent.InitComponents()
 	turbo.StartGRPC("github.com/vaporz/turbo-example/yourservice", "service",
 		50051, gcomponent.GrpcClient, gen.GrpcSwitcher, gimpl.RegisterServer)
 
+	//tcompoent.InitComponents()
 	//turbo.StartTHRIFT("github.com/vaporz/turbo-example/yourservice", "service",
 	//	50052, tcompoent.ThriftClient, gen.ThriftSwitcher, timpl.TProcessor)
 }

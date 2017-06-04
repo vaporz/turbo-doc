@@ -25,6 +25,12 @@ func InitComponents() {
 	turbo.SetPostprocessor("/eat_apple/{num:[0-9]+}", postEatApple)
 
 	//turbo.RegisterMessageFieldConvertor(new(proto.CommonValues), convertCommonValues)
+
+	turbo.WithErrorHandler(errorHandler)
+}
+
+func errorHandler(resp http.ResponseWriter, req *http.Request, err error) {
+	resp.Write([]byte("from errorHandler:" + err.Error()))
 }
 
 func convertCommonValues(req *http.Request) reflect.Value {
