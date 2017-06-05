@@ -1,7 +1,7 @@
 package gen
 
 import (
-	g "github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
+	"github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
 	"github.com/vaporz/turbo"
 	"reflect"
 	"net/http"
@@ -14,46 +14,43 @@ this is a generated file, DO NOT EDIT!
 var ThriftSwitcher = func(methodName string, resp http.ResponseWriter, req *http.Request) (serviceResponse interface{}, err error) {
 	switch methodName { 
 	case "SayHello":
-		args := g.YourServiceSayHelloArgs{}
+		args := gen.YourServiceSayHelloArgs{}
 		params, err := turbo.BuildArgs(reflect.TypeOf(args), reflect.ValueOf(args), req, buildStructArg)
 		if err != nil {
 			return nil, err
 		}
-		return turbo.ParseResult(callThriftMethod(methodName, params))
+		return turbo.ThriftService().(*gen.YourServiceClient).SayHello(
+			params[0].Interface().(string),
+			params[1].Interface().(*gen.CommonValues),
+			params[2].Interface().(*gen.HelloValues), )
 	case "EatApple":
-		args := g.YourServiceEatAppleArgs{}
+		args := gen.YourServiceEatAppleArgs{}
 		params, err := turbo.BuildArgs(reflect.TypeOf(args), reflect.ValueOf(args), req, buildStructArg)
 		if err != nil {
 			return nil, err
 		}
-		return turbo.ParseResult(callThriftMethod(methodName, params))
+		return turbo.ThriftService().(*gen.YourServiceClient).EatApple(
+			params[0].Interface().(int32),
+			params[1].Interface().(string),
+			params[2].Interface().(bool), )
 	case "TestProto":
-		args := g.YourServiceTestProtoArgs{}
-		params, err := turbo.BuildArgs(reflect.TypeOf(args), reflect.ValueOf(args), req, buildStructArg)
-		if err != nil {
-			return nil, err
-		}
-		return turbo.ParseResult(callThriftMethod(methodName, params))
+		return turbo.ThriftService().(*gen.YourServiceClient).TestProto( )
 	default:
 		return nil, errors.New("No such method[" + methodName + "]")
 	}
 }
 
-func callThriftMethod(methodName string, params []reflect.Value) []reflect.Value {
-	return reflect.ValueOf(turbo.ThriftService().(*g.YourServiceClient)).MethodByName(methodName).Call(params)
-}
-
 func buildStructArg(typeName string, req *http.Request) (v reflect.Value, err error) {
 	switch typeName { 
-	case "HelloValues":
-		request := &g.HelloValues{  }
+	case "CommonValues":
+		request := &gen.CommonValues{  }
 		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
 		if err != nil {
 			return v, err
 		}
 		return reflect.ValueOf(request), nil
-	case "CommonValues":
-		request := &g.CommonValues{  }
+	case "HelloValues":
+		request := &gen.HelloValues{  }
 		err = turbo.BuildStruct(reflect.TypeOf(request).Elem(), reflect.ValueOf(request).Elem(), req)
 		if err != nil {
 			return v, err

@@ -5,7 +5,6 @@ import (
 	"strconv"
 	"github.com/vaporz/turbo-example/yourservice/gen/proto"
 	"google.golang.org/grpc"
-	"errors"
 )
 
 func RegisterServer(s *grpc.Server) {
@@ -18,8 +17,9 @@ type YourService struct {
 func (s *YourService) SayHello(ctx context.Context, req *proto.SayHelloRequest) (*proto.SayHelloResponse, error) {
 	someId := strconv.FormatInt(req.Values.SomeId, 10)
 	return &proto.SayHelloResponse{Message: "[grpc server]Hello, " + req.YourName + ", someId=" + someId},
+		nil
 	//grpc.Errorf(codes.AlreadyExists, "string=%s", "124")
-		errors.New("error!!!!!")
+	//	errors.New("error!!!!!")
 }
 
 func (s *YourService) EatApple(ctx context.Context, req *proto.EatAppleRequest) (*proto.EatAppleResponse, error) {
