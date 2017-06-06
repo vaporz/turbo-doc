@@ -1,0 +1,6 @@
+grpc-fieldmapping:
+  - EatAppleRequest[]
+  - CommonValues[]
+  - SayHelloRequest[CommonValues Values,]
+  - TestProtoRequest[]
+
