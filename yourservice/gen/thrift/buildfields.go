@@ -4,14 +4,14 @@ import (
 	"os"
 	"io"
 	"text/template"
-	"github.com/vaporz/turbo-example/yourservice/gen/proto"
+	"github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
 	"reflect"
 	"fmt"
 	"strings"
 )
 
 func main() {
-	i := new(proto.YourServiceServer)
+	i := new(gen.YourService)
 	t := reflect.TypeOf(i).Elem()
 	numMethod := t.NumMethod()
 	items := make([]string, 0)
@@ -21,7 +21,7 @@ func main() {
 		for j := 0; j < numIn; j++ {
 			argType := method.Type.In(j)
 			argStr := argType.String()
-			if strings.HasSuffix(argStr, "Request") {
+			if argType.Kind() == reflect.Ptr && argType.Elem().Kind() == reflect.Struct {
 				arr := strings.Split(argStr, ".")
 				name := arr[len(arr)-1:][0]
 				items = findItem(items, name, argType)
@@ -33,7 +33,7 @@ func main() {
 		list += s + "\n"
 	}
 	writeFileWithTemplate(
-		"/Users/xiaozhang/goworkspace/src/github.com/vaporz/turbo-example/yourservice/gen/grpcfields.yaml",
+		"/Users/xiaozhang/goworkspace/src/github.com/vaporz/turbo-example/yourservice/gen/thriftfields.yaml",
 		fieldsYaml,
 		fieldsYamlValues{List: list},
 	)
@@ -79,6 +79,6 @@ type fieldsYamlValues struct {
 	List string
 }
 
-var fieldsYaml string = `grpc-fieldmapping:
+var fieldsYaml string = `thrift-fieldmapping:
 {{.List}}
 `

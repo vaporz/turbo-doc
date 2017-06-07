@@ -8,15 +8,6 @@ config:
   filter_proto_json_emit_zerovalues: true
   filter_proto_json_int64_as_number: false
 
-# TODO make a grpc plugin to generate this mapping
-grpc-fieldmapping:
-  - SayHelloRequest [CommonValues values]
-
-# TODO make a thrift plugin to generate this mapping
-thrift-fieldmapping:
-  - CommonValues
-  - HelloValues
-
 urlmapping:
   - GET,POST /hello SayHello
   - GET /eat_apple/{num:[0-9]+} EatApple
