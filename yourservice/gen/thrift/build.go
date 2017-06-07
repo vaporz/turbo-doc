@@ -1,17 +1,30 @@
 package main
 
 import (
-	"os"
-	"io"
-	"text/template"
-	"github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
+	g "github.com/vaporz/turbo-example/yourservice/gen/thrift/gen-go/gen"
 	"reflect"
 	"fmt"
+	"flag"
 	"strings"
+	"io"
+	"os"
+	"text/template"
 )
 
+var methodName = flag.String("n", "", "")
+
 func main() {
-	i := new(gen.YourService)
+	flag.Parse()
+	if len(strings.TrimSpace(*methodName)) > 0 {
+		str := buildParameterStr(*methodName)
+		fmt.Print(str)
+	} else {
+		buildFields()
+	}
+}
+
+func buildFields() {
+	i := new(g.YourService)
 	t := reflect.TypeOf(i).Elem()
 	numMethod := t.NumMethod()
 	items := make([]string, 0)
@@ -82,3 +95,43 @@ type fieldsYamlValues struct {
 var fieldsYaml string = `thrift-fieldmapping:
 {{.List}}
 `
+
+func buildParameterStr(methodName string) string {
+	switch methodName { 
+	case "TestProto":
+		var result string
+		args := g.YourServiceTestProtoArgs{}
+		at := reflect.TypeOf(args)
+		num := at.NumField()
+		for i := 0; i < num; i++ {
+			result += fmt.Sprintf(
+			"\n\t\t\tparams[%d].Interface().(%s),",
+			i, at.Field(i).Type.String())
+		}
+		return result
+	case "SayHello":
+		var result string
+		args := g.YourServiceSayHelloArgs{}
+		at := reflect.TypeOf(args)
+		num := at.NumField()
+		for i := 0; i < num; i++ {
+			result += fmt.Sprintf(
+			"\n\t\t\tparams[%d].Interface().(%s),",
+			i, at.Field(i).Type.String())
+		}
+		return result
+	case "EatApple":
+		var result string
+		args := g.YourServiceEatAppleArgs{}
+		at := reflect.TypeOf(args)
+		num := at.NumField()
+		for i := 0; i < num; i++ {
+			result += fmt.Sprintf(
+			"\n\t\t\tparams[%d].Interface().(%s),",
+			i, at.Field(i).Type.String())
+		}
+		return result
+	default:
+		return "error"
+	}
+}
