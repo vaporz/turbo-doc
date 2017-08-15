@@ -80,9 +80,94 @@ gRPC支持通过Header和Trailer在client和server端传递Metadata，我们可�
 实现该方案时，相对复杂一点的地方是“对比用户输入Json与message定义，拿到丢失的信息”，需要递归得利用反射来得到，但只要多花些时间，相信并不难。  
 与前一种方案相比，这个方案的优点是不定义新的基本类型，至于缺点，是给不同服务间通过gRPC调用增加了额外的复杂度，每一个服务都需要使用一个专门的方法来调用其他服务的接口，其中封装了前面提到的对比和组合过程。
 
-  3.  如何自定义error信息
-      3.1 不要扩展grpc预定义的status code
-      3.2 方案一：在response中添加err属性
-      3.3 方案二：通过metadata传递
-      3.4 方案三：通过Status中的details属性传递
-      3.5 总结
+## 如何扩展server端返回的Error
+在gRPC的server端返回error时，虽然接口的返回值中声明的是标准库的error，但gRPC内部会判断error是否特定的类型，如果不是，则会统一返回Code为“Unknown”的error。因此，多数情况下我们需要用专门的方法构造一个error，比如：
+```
+import "google.golang.org/grpc/status"
+...
+return status.Error(codes.Aborted, "aborted")
+```
+实际上，这个error的类型是“google.golang.org/genproto/googleapis/rpc/status” 包里面的“Status”，定义如下：
+```
+type Status struct {
+	Code int32
+	Message string
+	Details []*google_protobuf.Any
+}
+```
+除了Details字段外，只有Code和Message，十分简洁，但如果我们有更复杂的业务需求，这些字段是不能满足的，因此我们需要扩展Error。
+### 不要扩展grpc预定义的status code
+前面例子中，“codes.Aborted”是gRPC预定义的一些Code之一，很自然的，我们会想到，是否可以扩展这个Code列表。  
+我曾经尝试过扩展这个列表，在Go语言的gRPC客户端中是可以拿到自定义的Code的，但官方的开发人员在一些问答中表示不推荐这么做，而且一些其他语言的gRPC客户端中，一旦发现Code不在预定义的列表中，有可能直接替换成预定义的“Unknown”错误，甚至直接抛出异常，因此，不要这么做。
+### 在response中添加err属性
+这也是一种显而易见的方案，既然已有的error不能满足需求，那就在Response对象中加入一个“err”属性，而它的类型是自己定义的，大概是这个样子：
+```
+type MyResponse struct {
+  err MyErr
+  ...
+}
+```
+可以满足需求，但很不优雅，同意么？这么做直接违反了gRPC的错误处理机制，甚至不符合Go语言的规范，所以也不推荐这么做。
+### 通过metadata传递
+首先要说，这才是一个靠谱的方案，也是官方曾经推荐的方案。  
+先不说“曾经”是什么意思，我们来看看是这个方案是怎么玩的。  
+gRPC的Client端和Server端之间，可以借助名为“Metadata”的数据结构来传递额外的信息，而我们自己扩展的error信息就属于这个“额外信息”。  
+详细的用法可以参考在github上的文档：  
+https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md  
+这里将其中的一些代码示例贴在这里，以便让大家快速的有一个直观的印象。  
+以从Server端向Client端传递Metadata为例，首先在Server端将数据准备好：
+```
+func (s *server) SomeRPC(ctx context.Context, in *pb.someRequest) (*pb.someResponse, error) {
+	   // 创建并发送Header
+	   header := metadata.Pairs("header-key", "val")
+     grpc.SendHeader(ctx, header)
+     // 创建并发送Trailer
+     trailer := metadata.Pairs("trailer-key", "val")
+     grpc.SetTrailer(ctx, trailer)
+}
+```
+接着在Client端接收数据：
+```
+var header, trailer metadata.MD // 用来保存header和trailer的变量
+r, err := client.SomeRPC(
+    ctx,
+    someRequest,
+    grpc.Header(&header),    // 将会接收header
+    grpc.Trailer(&trailer),  // 将会接收trailer
+)
+
+// 按需求对header和trailer做处理
+```
+### 通过Status中的Details属性传递
+最后出场的是我们实际采用的方案。  
+我在前面将扩展的error信息称作“额外信息”，其实准确的说应该是“额外的error信息”，因此，直觉上最自然的方式还是在error对象内部携带这个信息。  
+你一定注意到了“Status“对象里的那个”Details“属性，它是一个“Any”对象的数组，字面上看似乎是“可以保存任何类型对象的数组”的意思，确实是这样。  
+gRPC最近刚刚添加了两个工具方法，使得“Details”属性变得非常易用：
+```
+// WithDetails返回一个新创建的Status对象，其中附加了参数details传入的Message列表，
+// 如果有error发生，将返回nil和第一个遇到的error。
+func (s *Status) WithDetails(details ...proto.Message) (*Status, error)
+
+// Details返回Status中Details携带的Message列表，
+// 如果decode某个Message时发生错误，那这个错误会被添加到结果列表中返回。
+func (s *Status) Details() []interface{} 
+```
+实际使用时很方便。  
+附加Details：
+```
+s, _ := status.New(codes.Aborted, "message").WithDetails(d1, d2)
+return nil, s.Err()
+```
+获取Details：
+```
+details, _ := s.Details()
+for _, d := range details {
+  m := d.(YourType)
+  // ...
+}
+```
+
+好了，以上就是我们在使用gRPC过程中遇到的两个问题和相应的思考，也许并不是最优的方案，但希望能给你带来一些提示。
+
+Go语言作为一种快速发展变化中的语言，相应的技术生态还不是十分健全，包括gRPC和由此衍生的gRPC-gateway等项目，仍然有不少提升空间。中国作为目前Go语言应用人数最多，气氛最火热的国家，希望能看到越来越多的国内开发者参与到开源项目的发展中，也希望有越来越多的优秀项目出现。
+
