@@ -18,7 +18,7 @@ For dependency management, we provide 2 ways:
 
 (Recommended) Use `glide <https://github.com/Masterminds/glide>`_ ::
 
-    cd github.com/vaporz/turbo/turbo
+    cd github.com/vaporz/turbo
     glide install
 
 (Not Recommended) Or install required packages manually::

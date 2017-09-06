@@ -18,8 +18,8 @@ For dependency management, we provide 2 ways:
 
 (Recommended) Use `glide <https://github.com/Masterminds/glide>`_ ::
 
-    cd github.com/vaporz/turbo/turbo
-    glide install
+    cd github.com/vaporz/turbo
+    glide install // if you've met any problem, try "rm -rf ~/.glide && glide install", still not work? ask Google.
 
 (Not Recommended) Or install required packages manually::
 

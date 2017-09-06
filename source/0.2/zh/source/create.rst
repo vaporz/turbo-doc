@@ -18,7 +18,7 @@
 
 (推荐) 通过 `glide <https://github.com/Masterminds/glide>`_ 安装::
 
-    cd github.com/vaporz/turbo/turbo
+    cd github.com/vaporz/turbo
     glide install
 
 (不推荐) 手动安装这些包::

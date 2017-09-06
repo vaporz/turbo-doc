@@ -18,8 +18,8 @@
 
 (推荐) 通过 `glide <https://github.com/Masterminds/glide>`_ 安装::
 
-    cd github.com/vaporz/turbo/turbo
-    glide install
+    cd github.com/vaporz/turbo
+    glide install // 如果出错，可以尝试运行"rm -rf ~/.glide && glide install"，还不行？那就网上搜一下吧。。。
 
 (不推荐) 手动安装这些包::
 
