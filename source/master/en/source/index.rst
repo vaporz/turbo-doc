@@ -3,7 +3,7 @@
 Turbo
 =====
 
-A lightweight microservice framework.
+A lightweight microservice tool, turn your grpc|thrift APIs into HTTP APIs!
 
 Features
 --------
@@ -17,3 +17,8 @@ Features
 * `Hijacker <hijacker>`_: Take over requests, do anything you want!
 * `Convertor <convertor>`_: Tell Turbo how to set a struct field.
 * Modify and reload `configuration <config>`_ file at runtime! Without restarting service.
+
+Requirements
+------------
+* Golang version: >= 1.8.x
+* Thrift version: >= 0.10.0

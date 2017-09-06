@@ -3,7 +3,7 @@
 Turbo
 =====
 
-一个很"轻"的微服务框架。
+一个很"轻"的微服务工具，把你的grpc|thrift接口变成HTTP接口！
 
 主要功能
 --------
@@ -17,3 +17,8 @@ Turbo
 * `劫持器（Hijacker） <hijacker>`_ : 接管整个request处理过程，你想干什么都行！
 * `Message字段转换器（Convertor） <convertor>`_ : 告诉 Turbo 怎么给struct里的参数赋值。
 * 不需要重启服务，在运行时修改和重新载入 `配置文件 <config>`_  ！
+
+版本要求
+--------
+* Golang version: >= 1.8.x
+* Thrift version: >= 0.10.0

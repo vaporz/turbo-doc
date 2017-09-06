@@ -3,7 +3,7 @@
 Turbo
 =====
 
-A lightweight microservice framework.
+A lightweight microservice tool, turn your grpc|thrift APIs into HTTP APIs!
 
 Github: https://github.com/vaporz/turbo
 
