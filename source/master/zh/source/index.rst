@@ -9,6 +9,7 @@ Turbo
 --------
 
 * Turbo能生成一个反向代理服务器，把HTTP请求转换为 grpc 或者 Thrift 格式的请求。
+ **(换句话说，你现在有一个grpc|thrift的service？Turbo能把你的grpc|thrift接口变成HTTP接口！)**
 * 支持 gRPC 和 `Thrift <thrift>`_ 。
 * 支持 `RESTFUL JSON API <json>`_ （"application/json"）。
 * `拦截器（Interceptor） <interceptor>`_ 。

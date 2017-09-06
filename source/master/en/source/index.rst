@@ -9,6 +9,7 @@ Features
 --------
 
 * Turbo generates a reverse-proxy server which translates a HTTP request into a grpc/Thrift request.
+ **(In other words, now you have a grpc|thrift service? Turbo turns your grpc|thrift APIs into HTTP APIs!)**
 * Support gRPC and `Thrift <thrift>`_.
 * Support `RESTFUL JSON API <json>`_ ("application/json").
 * `Interceptor <interceptor>`_.
