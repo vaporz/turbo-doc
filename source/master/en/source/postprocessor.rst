@@ -13,7 +13,7 @@ Edit "yourservice/grpcapi/component/components.go":
 
 .. code-block:: diff
 
- func RegisterComponents(s *turbo.GrpcServer) {
+ func (i *ServiceInitializer) InitService(s turbo.Servable) error {
  +	 s.RegisterComponent("postEatApple", postEatApple)
  }
 

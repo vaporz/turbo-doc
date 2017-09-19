@@ -61,12 +61,8 @@ Edit "yourservice/grpcapi/component/components.go":
  +	i "github.com/vaporz/turbo-example/yourservice/interceptor"
  )
  
- func GrpcClient(conn *grpc.ClientConn) interface{} {
- 	return proto.NewTestServiceClient(conn)
- }
-
- func RegisterComponents(s *turbo.GrpcServer) {
- +	 s.RegisterComponent("LogInterceptor", i.LogInterceptor{})
+ func (i *ServiceInitializer) InitService(s turbo.Servable) error {
+ +	 s.RegisterComponent("LogInterceptor", interceptor.LogInterceptor{})
  }
 
 Edit "yourservice/service.yaml":

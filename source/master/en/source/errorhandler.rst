@@ -9,7 +9,7 @@ You can customize this behavior via ErrorHandler:
 
 .. code-block:: diff
 
- func RegisterComponents(s *turbo.GrpcServer) {
+ func (i *ServiceInitializer) InitService(s turbo.Servable) error {
  +	 s.RegisterComponent("errorHandler", errorHandler)
  }
 

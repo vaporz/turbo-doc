@@ -58,15 +58,11 @@ Interceptor
  import (
  	"github.com/vaporz/turbo-example/yourservice/gen/proto"
  	"google.golang.org/grpc"
- +	i "github.com/vaporz/turbo-example/yourservice/interceptor"
+ +	"github.com/vaporz/turbo-example/yourservice/interceptor"
  )
  
- func GrpcClient(conn *grpc.ClientConn) interface{} {
- 	return proto.NewTestServiceClient(conn)
- }
-
- func RegisterComponents(s *turbo.GrpcServer) {
- +	 s.RegisterComponent("LogInterceptor", i.LogInterceptor{})
+ func (i *ServiceInitializer) InitService(s turbo.Servable) error {
+ +	 s.RegisterComponent("LogInterceptor", interceptor.LogInterceptor{})
  }
 
 编辑 "yourservice/service.yaml":

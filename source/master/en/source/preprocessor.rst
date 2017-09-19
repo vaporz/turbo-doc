@@ -17,7 +17,7 @@ Let's check the value of 'num' with a preprocessor:
 
 .. code-block:: diff
 
- func RegisterComponents(s *turbo.GrpcServer) {
+ func (i *ServiceInitializer) InitService(s turbo.Servable) error {
  +	 s.RegisterComponent("preEatApple", preEatApple)
  }
 

@@ -11,10 +11,10 @@ Preprocessor可以用来执行一些某个API特有的逻辑，比如，参数�
 
 .. code-block:: diff
 
- func RegisterComponents(s *turbo.GrpcServer) {
+ func (i *ServiceInitializer) InitService(s turbo.Servable) error {
  +	 s.RegisterComponent("preEatApple", preEatApple)
  }
- 
+
  +var preEatApple turbo.Preprocessor = func (resp http.ResponseWriter, req *http.Request) error {
  +	num,err := strconv.Atoi(req.Form["num"][0])
  +	if err!=nil {

@@ -11,10 +11,10 @@ Turbo 也允许你"手动"组装一个struct对象，举个例子：
 
 .. code-block:: diff
 
- func RegisterComponents(s *turbo.GrpcServer) {
+ func (i *ServiceInitializer) InitService(s turbo.Servable) error {
  +	 s.RegisterComponent("CommonValues", convertCommonValues)
  }
- 
+
  +var convertCommonValues turbo.Convertor = func(req *http.Request) reflect.Value {
  +	result := &proto.CommonValues{}
  +	result.SomeId = 123456789

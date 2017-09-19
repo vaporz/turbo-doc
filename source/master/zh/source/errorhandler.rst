@@ -9,10 +9,10 @@ ErrorHandler
 
 .. code-block:: diff
 
- func RegisterComponents(s *turbo.GrpcServer) {
+ func (i *ServiceInitializer) InitService(s turbo.Servable) error {
  +	 s.RegisterComponent("errorHandler", errorHandler)
  }
- 
+
  +var errorHandler turbo.ErrorHandlerFunc = func (resp http.ResponseWriter, req *http.Request, err error) {
  +  	resp.Write([]byte("from errorHandler:" + err.Error()))
  +}

@@ -13,7 +13,7 @@ In this example, URL "/eat_apple/{num:[0-9]+}" is hijacked, no matter what the v
 
 .. code-block:: diff
 
- func RegisterComponents(s *turbo.GrpcServer) {
+ func (i *ServiceInitializer) InitService(s turbo.Servable) error {
  +	 s.RegisterComponent("hijackEatApple", hijackEatApple)
  }
 

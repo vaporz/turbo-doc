@@ -11,8 +11,8 @@ Edit "yourservice/grpcapi/component/components.go":
 
 .. code-block:: diff
 
- func RegisterComponents(s *turbo.GrpcServer) {
- +	 s.RegisterComponent("convertCommonValues", convertCommonValues)
+ func (i *ServiceInitializer) InitService(s turbo.Servable) error {
+ +	 s.RegisterComponent("CommonValues", convertCommonValues)
  }
  
  +var convertCommonValues turbo.Convertor = func (req *http.Request) reflect.Value {
