@@ -2,6 +2,15 @@
 
 配置文件service.yaml
 =====================
+位于以下节点内的配置内容，可在运行时修改，并在运行时直接生效，不需要重启服务::
+
+ urlmapping:
+ interceptor:
+ preprocessor:
+ postprocessor:
+ hijacker:
+ convertor:
+ errorhandler:
 
 .. code-block:: yaml
 

@@ -6,7 +6,7 @@
 0, 开始之前
 -----------
 
-显然，你得先安装 `Golang <https://golang.org>`_ 和 `Protocol buffers(v3) <https://developers.google.com/protocol-buffers/>`_ 。
+显然，你得先安装 `Golang <https://golang.org>`_ 和 `Protocol buffers <https://developers.google.com/protocol-buffers/>`_ 。
 
 然后下载Turbo代码：
 
@@ -14,14 +14,7 @@
 
     go get github.com/vaporz/turbo
 
-至于依赖管理，有两种方式：
-
-(推荐) 通过 `glide <https://github.com/Masterminds/glide>`_ 安装::
-
-    cd github.com/vaporz/turbo
-    glide install // 如果出错，可以尝试运行"rm -rf ~/.glide && glide install"，还不行？那就网上搜一下吧。。。
-
-(不推荐) 手动安装这些包::
+Turbo依赖的package::
 
     go get google.golang.org/grpc
     go get git.apache.org/thrift.git/lib/go/thrift
@@ -31,6 +24,11 @@
     go get github.com/spf13/cobra
     go get github.com/spf13/viper
     go get github.com/bitly/go-simplejson
+
+对于 **开发者**，推荐通过 `glide <https://github.com/Masterminds/glide>`_ 管理依赖::
+
+    cd github.com/vaporz/turbo
+    glide install // 如果出错，可以尝试运行"rm -rf ~/.glide && glide install"，还不行？那就网上搜一下吧。。。
 
 1, 安装命令行工具
 -----------------

@@ -6,7 +6,7 @@ Create a service on the fly
 0, Before the start
 -------------------
 
-Obviously, you have to install `Golang <https://golang.org>`_ and `Protocol buffers(v3) <https://developers.google.com/protocol-buffers/>`_ first.
+Obviously, you have to install `Golang <https://golang.org>`_ and `Protocol buffers <https://developers.google.com/protocol-buffers/>`_ first.
 
 Then download turbo repo with:
 
@@ -14,14 +14,7 @@ Then download turbo repo with:
 
     go get github.com/vaporz/turbo
 
-For dependency management, we provide 2 ways:
-
-(Recommended) Use `glide <https://github.com/Masterminds/glide>`_ ::
-
-    cd github.com/vaporz/turbo
-    glide install // if you've met any problem, try "rm -rf ~/.glide && glide install", still not work? ask Google.
-
-(Not Recommended) Or install required packages manually::
+Packages turbo used::
 
     go get google.golang.org/grpc
     go get git.apache.org/thrift.git/lib/go/thrift
@@ -31,6 +24,11 @@ For dependency management, we provide 2 ways:
     go get github.com/spf13/cobra
     go get github.com/spf13/viper
     go get github.com/bitly/go-simplejson
+
+For **CONTRIBUTORs**, it's recommended to use `glide <https://github.com/Masterminds/glide>`_ for dependency management::
+
+    cd github.com/vaporz/turbo
+    glide install // if you've met any problem, try "rm -rf ~/.glide && glide install", still not work? ask Google.
 
 1, Install Turbo command line tools
 -----------------------------------

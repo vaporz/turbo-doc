@@ -4,7 +4,8 @@ Turbo components
 ================
 
 .. toctree::
-  
+
+    map
     interceptor
     preprocessor
     postprocessor

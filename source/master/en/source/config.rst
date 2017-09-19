@@ -2,6 +2,15 @@
 
 Configs in service.yaml
 =======================
+Contents under following nodes, can be modified and reloaded at runtime, without restarting your service::
+
+ urlmapping:
+ interceptor:
+ preprocessor:
+ postprocessor:
+ hijacker:
+ convertor:
+ errorhandler:
 
 .. code-block:: yaml
 
