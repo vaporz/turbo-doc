@@ -67,8 +67,8 @@ Contents under following nodes, can be modified and reloaded at runtime, without
  # The format is "HTTP_METHOD URL SERVICE_METHOD_NAME".
  # Trubo use that awsome [gorilla mux](github.com/gorilla/mux) as router, it also support variables in URL.
  urlmapping:
-   - GET,POST /hello SayHello
-   - GET /eat_apple/{num:[0-9]+} EatApple
+   - GET,POST /hello YourService SayHello
+   - GET /eat_apple/{num:[0-9]+} YourService EatApple
 
  # Register Turbo components via turbo.Server.RegisterComponent("name", component)
  # As a convention, "name" is the same with the component struct|func's name (e.g. "LogInterceptor").

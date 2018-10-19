@@ -19,3 +19,4 @@
     支持RESTFUL JSON API <json>
     支持Thrift <thrift>
     配置文件说明 <config>
+    启动多个service <multiplexing>

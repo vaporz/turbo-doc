@@ -64,11 +64,11 @@
  
  # 这个映射是Turbo最核心的配置！
  # 这项配置告诉Turbo怎么把一个HTTP请求代理到后端的service方法上。
- # 配置的格式是 "HTTP_METHOD URL SERVICE_METHOD_NAME".
+ # 配置的格式是 "HTTP_METHOD URL SERVICE_NAME SERVICE_METHOD_NAME".
  # Turbo是借助于好用的 [gorilla mux](github.com/gorilla/mux) 来实现这个功能的，它还支持获取URL里的参数。
  urlmapping:
-   - GET,POST /hello SayHello
-   - GET /eat_apple/{num:[0-9]+} EatApple
+   - GET,POST /hello YourService SayHello
+   - GET /eat_apple/{num:[0-9]+} YourService EatApple
 
  # 通过方法 turbo.Server.RegisterComponent("name", component) 来注册一个组件。
  # 习惯上，"name" 是被注册的组件struct的名字 (比如 "LogInterceptor")。

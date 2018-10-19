@@ -31,8 +31,8 @@ Modify "service.yaml":
 .. code-block:: diff
 
  urlmapping:
-    - GET /hello SayHello
- +  - GET /eat_apple/{num:[0-9]+} EatApple
+    - GET /hello YourService SayHello
+ +  - GET /eat_apple/{num:[0-9]+} YourService EatApple
 
 3, Generate new codes
 ---------------------

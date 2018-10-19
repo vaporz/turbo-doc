@@ -10,11 +10,11 @@ HTTP接口与后端接口映射
 .. code-block:: yaml
 
 	urlmapping:
- 	  - GET /hello SayHello
-	  - GET /eat_apple/{num:[0-9]+} EatApple
+ 	  - GET /hello YourService SayHello
+	  - GET /eat_apple/{num:[0-9]+} YourService EatApple
 
-在这段配置中，发送给HTTP接口"GET /hello"的请求将转发到后端接口"SayHello"，
-而发送给HTTP接口"GET /eat_apple/{num:[0-9]+}"的请求将转发给后端接口"EatApple"，而且在URL中定义了一个叫做"num"的参数，
+在这段配置中，发送给HTTP接口"GET /hello"的请求将转发到YourService的接口"SayHello"，
+而发送给HTTP接口"GET /eat_apple/{num:[0-9]+}"的请求将转发给YourService的接口"EatApple"，而且在URL中定义了一个叫做"num"的参数，
 参数的格式为"[0-9]+"，很明显，这个正则表达式的意思是数字。
 
 在Turbo内部，URL路由和正则功能是由好用又强大的"github.com/gorilla/mux"提供的，因此，关于URL路由功能，请参考 `该项目的文档 <https://github.com/gorilla/mux>`_ 。
@@ -24,10 +24,10 @@ HTTP接口与后端接口的映射关系可以是多对一的，也就是可以�
 .. code-block:: yaml
 
 	urlmapping:
- 	  - GET /hello SayHello
- 	  - POST /hello SayHello
- 	  - GET /new/hello SayHello
-	  - GET /eat_apple/{num:[0-9]+} EatApple
+ 	  - GET /hello YourService SayHello
+ 	  - POST /hello YourService SayHello
+ 	  - GET /new/hello YourService SayHello
+	  - GET /eat_apple/{num:[0-9]+} YourService EatApple
 
 这样，两个新接口"POST /hello"和"GET /new/hello"都将被映射到"SayHello"上。
 
@@ -36,8 +36,8 @@ HTTP接口与后端接口的映射关系可以是多对一的，也就是可以�
 .. code-block:: yaml
 
 	urlmapping:
- 	  - GET,POST,UPDATE /hello SayHello
- 	  - GET /new/hello SayHello
-	  - GET /eat_apple/{num:[0-9]+} EatApple
+ 	  - GET,POST,UPDATE /hello YourService SayHello
+ 	  - GET /new/hello YourService SayHello
+	  - GET /eat_apple/{num:[0-9]+} YourService EatApple
 
 "GET,POST,UPDATE /hello"表示了三个HTTP接口，他们的URL相同，但谓词不同，并且都被映射到后端接口"SayHello"。

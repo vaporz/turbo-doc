@@ -10,8 +10,8 @@ From `previous example <add>`_ , we have a config like this:
 .. code-block:: yaml
 
 	urlmapping:
- 	  - GET /hello SayHello
-	  - GET /eat_apple/{num:[0-9]+} EatApple
+ 	  - GET /hello YourService SayHello
+	  - GET /eat_apple/{num:[0-9]+} YourService EatApple
 
 As this config says, any request sent to HTTP API "GET /hello" is redirected to backend API "SayHello".
 And any request sent to HTTP API "GET /eat_apple/{num:[0-9]+}" is redirected to backend API "EatApple",
@@ -25,10 +25,10 @@ Mapping between HTTP API and backend API can be N:1, for example:
 .. code-block:: yaml
 
 	urlmapping:
- 	  - GET /hello SayHello
- 	  - POST /hello SayHello
- 	  - GET /new/hello SayHello
-	  - GET /eat_apple/{num:[0-9]+} EatApple
+ 	  - GET /hello YourService SayHello
+ 	  - POST /hello YourService SayHello
+ 	  - GET /new/hello YourService SayHello
+	  - GET /eat_apple/{num:[0-9]+} YourService EatApple
 
 So, new HTTP API "POST /hello" and "GET /new/hello" are both mapped to "SayHello".
 
@@ -38,9 +38,9 @@ then you can also write like this:
 .. code-block:: yaml
 
 	urlmapping:
- 	  - GET,POST,UPDATE /hello SayHello
- 	  - GET /new/hello SayHello
-	  - GET /eat_apple/{num:[0-9]+} EatApple
+ 	  - GET,POST,UPDATE /hello YourService SayHello
+ 	  - GET /new/hello YourService SayHello
+	  - GET /eat_apple/{num:[0-9]+} YourService EatApple
 
 "GET,POST,UPDATE /hello" presents 3 HTTP APIs, their URL are same, but with different request method, and they
 are all mapped to backend API "SayHello".

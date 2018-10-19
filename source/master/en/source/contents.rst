@@ -19,3 +19,4 @@ Index
     Support RESTFUL JSON API <json>
     Thrift support <thrift>
     Configs in service.yaml <config>
+    Service Multiplexing <multiplexing>
