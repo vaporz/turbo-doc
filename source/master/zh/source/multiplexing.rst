@@ -26,6 +26,9 @@ gRPC
 
 .. code-block:: diff
 
+ config:
+ -  grpc_service_name: TestService
+ +  grpc_service_name: TestService,CatService
  urlmapping:
  + - GET /cat/meow CatService Meow
 
@@ -82,6 +85,9 @@ Thrift
 
 .. code-block:: diff
 
+ config:
+ -  thrift_service_name: TestService
+ +  thrift_service_name: TestService,CatService
  urlmapping:
  + - GET /cat/meow CatService Meow
 
