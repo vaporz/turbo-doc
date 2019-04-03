@@ -10,7 +10,8 @@ ErrorHandler
 .. code-block:: diff
 
  func (i *ServiceInitializer) InitService(s turbo.Servable) error {
- +	 s.RegisterComponent("errorHandler", errorHandler)
+ +	 s.ServerField().RegisterComponent("errorHandler", errorHandler)
+     return nil
  }
 
  +var errorHandler turbo.ErrorHandlerFunc = func (resp http.ResponseWriter, req *http.Request, err error) {

@@ -62,7 +62,8 @@ Interceptor
  )
  
  func (i *ServiceInitializer) InitService(s turbo.Servable) error {
- +	 s.RegisterComponent("LogInterceptor", interceptor.LogInterceptor{})
+ +	 s.ServerField().RegisterComponent("LogInterceptor", interceptor.LogInterceptor{})
+     return nil
  }
 
 编辑 "yourservice/service.yaml":
