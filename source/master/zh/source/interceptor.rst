@@ -62,7 +62,7 @@ Interceptor
  )
  
  func (i *ServiceInitializer) InitService(s turbo.Servable) error {
- +	 s.ServerField().RegisterComponent("LogInterceptor", interceptor.LogInterceptor{})
+ +	 s.RegisterComponent("LogInterceptor", interceptor.LogInterceptor{})
      return nil
  }
 

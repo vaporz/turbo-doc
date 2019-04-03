@@ -16,7 +16,7 @@ Hijacker跟preprocessor类型，区别在于，hijacker接管了整个request处
 .. code-block:: diff
 
  func (i *ServiceInitializer) InitService(s turbo.Servable) error {
- +	 s.ServerField().RegisterComponent("hijackEatApple", hijackEatApple)
+ +	 s.RegisterComponent("hijackEatApple", hijackEatApple)
      return nil
  }
 

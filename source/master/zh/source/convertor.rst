@@ -12,7 +12,7 @@ Turbo 也允许你"手动"组装一个struct对象，举个例子：
 .. code-block:: diff
 
  func (i *ServiceInitializer) InitService(s turbo.Servable) error {
- +	 s.ServerField().RegisterComponent("CommonValues", convertCommonValues)
+ +	 s.RegisterComponent("CommonValues", convertCommonValues)
      return nil
  }
 

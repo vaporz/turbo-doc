@@ -10,7 +10,7 @@ ErrorHandler
 .. code-block:: diff
 
  func (i *ServiceInitializer) InitService(s turbo.Servable) error {
- +	 s.ServerField().RegisterComponent("errorHandler", errorHandler)
+ +	 s.RegisterComponent("errorHandler", errorHandler)
      return nil
  }
 

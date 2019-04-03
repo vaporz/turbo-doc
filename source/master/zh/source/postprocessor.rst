@@ -14,7 +14,7 @@ Postprocessor用来处理后端返回的对象（当然你也可以顺便干点�
 .. code-block:: diff
 
  func (i *ServiceInitializer) InitService(s turbo.Servable) error {
- +	 s.ServerField().RegisterComponent("postEatApple", postEatApple)
+ +	 s.RegisterComponent("postEatApple", postEatApple)
      return nil
  }
 
