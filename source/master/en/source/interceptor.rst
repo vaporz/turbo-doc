@@ -37,14 +37,14 @@ Edit "yourservice/interceptor/log.go":
  	turbo.BaseInterceptor
  }
  
- func (l LogInterceptor) Before(resp http.ResponseWriter, req *http.Request) (*http.Request, error) {
+ func (l *LogInterceptor) Before(resp http.ResponseWriter, req *http.Request) error {
  	fmt.Println("[Before] Request URL:"+req.URL.Path)
- 	return req, nil
+ 	return nil
  }
  
- func (l LogInterceptor) After(resp http.ResponseWriter, req *http.Request) (*http.Request, error) {
+ func (l *LogInterceptor) After(resp http.ResponseWriter, req *http.Request) error {
  	fmt.Println("[After] Request URL:"+req.URL.Path)
- 	return req, nil
+ 	return nil
  }
 
 Then assign this interceptor to URL "/hello".
@@ -62,7 +62,7 @@ Edit "yourservice/grpcapi/component/components.go":
  )
  
  func (i *ServiceInitializer) InitService(s turbo.Servable) error {
- +	 s.RegisterComponent("LogInterceptor", interceptor.LogInterceptor{})
+ +	 s.RegisterComponent("LogInterceptor", &interceptor.LogInterceptor{})
  }
 
 Edit "yourservice/service.yaml":
@@ -89,11 +89,11 @@ To do this, you can simply return an error:
 
 .. code-block:: diff
 
- func (l LogInterceptor) Before(resp http.ResponseWriter, req *http.Request) (*http.Request, error) {
+ func (l *LogInterceptor) Before(resp http.ResponseWriter, req *http.Request) error {
  	fmt.Println("[Before] Request URL:"+req.URL.Path)
  +	resp.Write([]byte("Encounter an error from LogInterceptor!\n"))
- -	return req, nil
- +	return req, errors.New("error!")
+ -	return nil
+ +	return errors.New("error!")
  }
 
 Test::
