@@ -21,5 +21,5 @@ Features
 
 Requirements
 ------------
-* Golang version: >= 1.8.x
-* Thrift version: >= 0.10.0
+* Golang version: >= 1.14.x
+* Thrift version: >= 0.12.0
